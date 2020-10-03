@@ -63,7 +63,7 @@ export default {
       input: ''
     }
   },
-   methods:{
+  methods: {
     newtest () {
       alert(this.input)
       if (this.input !== '') {

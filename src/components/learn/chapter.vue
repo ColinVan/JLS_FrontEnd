@@ -105,7 +105,7 @@ export default {
 
     // v-outline组件所必须的函数
     jumpToAnchor (id) {
-      let element = document.getElementById(id)
+      const element = document.getElementById(id)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
       }
@@ -134,16 +134,16 @@ export default {
     // 学会了->已学习
     hasLearn () {
       this.axios.post('/api/user/progress/add', 
-      {
-        token: this.$store.getters.getToken,
-        chapterid: this.content.chapterid
-      }).then(body => { this.isLearn = true })
+        {
+          token: this.$store.getters.getToken,
+          chapterid: this.content.chapterid
+        }).then(body => { this.isLearn = true })
     }
   },
 
   computed: {
     prop () {
-      let chapterdata = {
+      const chapterdata = {
         subfield: false,
         defaultOpen: 'preview',
         editable: false,
