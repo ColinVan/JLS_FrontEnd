@@ -10,12 +10,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import mavonEditor from 'mavon-editor'
-import outline from 'vue-outline'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
-Vue.use(outline)
 
 Vue.config.productionTip = false
 

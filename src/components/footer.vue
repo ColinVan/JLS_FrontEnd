@@ -17,7 +17,7 @@ export default {
   data () {
 
   },
-   methods:{
+  methods: {
     showroute () {
       alert('showroute')
       console.log(this.$route)

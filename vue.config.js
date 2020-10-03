@@ -27,9 +27,10 @@ module.exports = {
     devServer: {
         host: '192.168.1.103',
         port: 8081,
+        https: true,
         proxy: {
             '/api': {
-                target: "http://192.168.1.103:8080", /*后端接口地址*/
+                target: "http://192.168.1.103:8080", /*后端接口地址, 可能是因为原后端项目不支持https, 所以...*/
                 ws: true, /*是否启用websockets*/
                 /**
                  * changeOrigin选项配置是否允许跨域

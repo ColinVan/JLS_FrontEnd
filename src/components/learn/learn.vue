@@ -12,7 +12,7 @@
     </div>
     <el-row :gutter="10">
       <!--学习章节导航条,占页面左侧六分之一-->
-      <el-col :xs="24" :sm="4" :md="4" class="menu-col">
+      <el-col :xs="4" :sm="4" :md="4" class="menu-col">
         <!--el-menu的default-active属性表示该导航条默认显示哪个组件-->
         <el-menu class="learn-menu" default-active="/learn/basic" router=true>
 
@@ -80,7 +80,7 @@
       </el-col>
 
       <!--学习页面的主要部分,它显示每一章节的学习内容-->
-      <el-col :xs="24" :sm="20" :md="20">
+      <el-col :xs="20" :sm="20" :md="20">
         <keep-alive>
           <router-view>Content</router-view>
         </keep-alive>

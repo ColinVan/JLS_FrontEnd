@@ -27,35 +27,18 @@ export default {
       contents: []
     }
   },
-
-  // 组件生命周期详见https://www.cnblogs.com/qidh/p/11431998.html
   mounted () {
     this.axios.get('/api/chapter/list').then(body => { this.contents = body.data })
   },
-
-  // 关于vue的watch侦听器,详见官方文档:https://cn.vuejs.org/v2/guide/computed.html
-  // 该侦听器的作用是 当用户点击左侧学习导航条导致网址出现变化时 通过截取网址后段内容并组成http请求报文发送给后端请求新的学习内容
   watch: {
     '$route' (to, from) {
-      // JavaScript中stringObject.lastIndexOf(searchvalue,fromindex)方法
-      // 表示一个指定的字符串值最后出现的位置
-      // alert('this.$route.path is: ' + this.$route.path)
-      // let index = this.$route.path.lastIndexOf('/')
-      const index = to.path.lastIndexOf('/')
-
-      // JavaScript中stringObject.substring(start,stop)方法
-      // 表示截取字符串中介于两个指定下标之间的字符
-      const para = to.path.substring(index + 1, this.$route.path.length)
-      console.log(para)
-
-      let url = '/api/chapter/list'
-      if (para !== 'learn' && para !== '') {
-        url += '/sort/' + para
+      const para = to.path.substring(to.path.lastIndexOf('/') + 1, this.$route.path.length)
+      if (from.path.substring(0, 6) === '/learn' && to.path.substring(0, 6) === '/learn') {
+        alert('from.path is: ' + from.path + '\nto.path is: ' + to.path + '\npara in learnContent is: ' + para)
+        const url = '/api/chapter/list/sort/' + para // for example: /api/chapter/list/sort/basic
+        // axios有get和post两种方法 其中post比get要多传一个数据对象 回调函数都是body=>{xxx}
+        this.axios.get(url).then(body => { this.contents = body.data })
       }
-      console.log(url)
-      alert(url) // for example: /api/chapter/list/sort/basic
-      // axios有get和post两种方法 其中post比get要多传一个数据对象 回调函数都是body=>{xxx}
-      this.axios.get(url).then(body => { this.contents = body.data })
     }
   }
 }

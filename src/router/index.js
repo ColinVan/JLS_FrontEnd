@@ -9,6 +9,10 @@ import Learn from '../components/learn/learn'
 import learnContent from '../components/learn/learnContent'
 import Chapter from '../components/learn/chapter'
 
+import Blog from '../components/blog/blog'
+import Article from '../components/blog/article'
+import AddArticle from '../components/blog/addArticle'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -92,6 +96,18 @@ const routes = [
   {
     path: '/learn/chapter/*',
     component: Chapter
+  },
+  {
+    path: '/blog',
+    component: Blog
+  },
+  {
+    path: '/addArticle',
+    component: AddArticle
+  },
+  {
+    path: '/article/*',
+    component: Article
   }
 ]
 
