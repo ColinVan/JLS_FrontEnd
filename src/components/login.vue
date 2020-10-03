@@ -55,10 +55,10 @@ export default {
       rules: {
         // 对data域内的username和password提出约束, 这是element-ui给表单提供的功能
         username: [
-          {required: true, message: '账号不可为空', trigger: 'blur'}
+          { required: true, message: '账号不可为空', trigger: 'blur' }
         ],
         password: [
-          {required: true, message: '密码不可为空', trigger: 'blur'}
+          { required: true, message: '密码不可为空', trigger: 'blur' }
         ]
       },
       isAlertDisplay: false
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     onSubmit (formName) {
-      let user = {
+      const user = {
         username: this.form.username,
         password: md5(this.form.password)
       }
@@ -85,7 +85,7 @@ export default {
           // 把用户填写的登录信息发给服务器
           this.axios.post('/api/user/login', user).then(body => {
             // 服务器检测用户提交的用户名和密码, 如果检测成功, 则服务器返回密码的md5值, 否则服务器回送一个空值
-            let token = body.data
+            const token = body.data
             if (token === '') {
               alert('token from server is:' + token)
               this.isAlertDisplay = true

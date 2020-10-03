@@ -14,15 +14,15 @@
 
 <script>
 export default {
-  data() {
+  data () {
 
   },
-  methods:{
-    showroute(){
+   methods:{
+    showroute () {
       alert('showroute')
       console.log(this.$route)
     },
-    showrouter(){
+    showrouter () {
       alert('showrouter')
       console.log(this.$router)
     }

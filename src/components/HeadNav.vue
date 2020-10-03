@@ -63,11 +63,11 @@ export default {
       input: ''
     }
   },
-  methods:{
-    newtest() {
+   methods:{
+    newtest () {
       alert(this.input)
-      if(this.input !== ''){
-        this.axios.post('/api/search', {keyword: this.input}).then(body => {
+      if (this.input !== '') {
+        this.axios.post('/api/search', { keyword: this.input }).then(body => {
           console.log(body.data.message)
           alert(body.data.message)
         })

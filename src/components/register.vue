@@ -59,16 +59,16 @@ export default {
       },
       rules: {
         nickname: [
-          {required: true, message: '昵称不可为空', trigger: 'blur'}
+          { required: true, message: '昵称不可为空', trigger: 'blur' }
         ],
         username: [
-          {required: true, message: '账号不可为空', trigger: 'blur'}
+          { required: true, message: '账号不可为空', trigger: 'blur' }
         ],
         password: [
-          {required: true, message: '密码不可为空', trigger: 'blur'}
+          { required: true, message: '密码不可为空', trigger: 'blur' }
         ],
         assertpassword: [
-          {required: true, message: '请输入确认密码', trigger: 'blur'}
+          { required: true, message: '请输入确认密码', trigger: 'blur' }
         ]
       },
       isAlertDisplay: false
@@ -88,7 +88,7 @@ export default {
         alert('两次输入的密码不同')
         return false
       }
-      let user = {
+      const user = {
         nickname: this.form.nickname,
         username: this.form.username,
         password: md5(this.form.password),
@@ -100,19 +100,18 @@ export default {
         console.log(valid)
         if (valid) {
           this.axios.post('/api/user/add', user).then(body => {
-            if (body.data.message === "OK") {
-              alert("注册成功!")
+            if (body.data.message === 'OK') {
+              alert('注册成功!')
               this.$router.push('/')
               return true
-            }
-            else{
+            } else {
               this.isAlertDisplay = true
               alert(body.data.message)
               return false
             }
           })
         } else {
-          alert("this.$refs[formName].validate FAILED.No (valid)")
+          alert('this.$refs[formName].validate FAILED.No (valid)')
           return false
         }
       })
