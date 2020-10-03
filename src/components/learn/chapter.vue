@@ -133,11 +133,10 @@ export default {
     },
     // 学会了->已学习
     hasLearn () {
-      this.axios.post('/api/user/progress/add', 
-        {
-          token: this.$store.getters.getToken,
-          chapterid: this.content.chapterid
-        }).then(body => { this.isLearn = true })
+      this.axios.post('/api/user/progress/add', {
+        token: this.$store.getters.getToken,
+        chapterid: this.content.chapterid
+      }).then(body => { this.isLearn = true })
     }
   },
 
