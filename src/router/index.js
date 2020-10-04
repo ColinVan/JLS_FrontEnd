@@ -13,6 +13,8 @@ import Blog from '../components/blog/blog'
 import Article from '../components/blog/article'
 import AddArticle from '../components/blog/addArticle'
 
+import Practice from '../components/question/practice'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -108,6 +110,10 @@ const routes = [
   {
     path: '/article/*',
     component: Article
+  },
+  {
+    path: '/practice',
+    component: Practice
   }
 ]
 
