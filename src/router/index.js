@@ -15,6 +15,12 @@ import AddArticle from '../components/blog/addArticle'
 
 import Practice from '../components/question/practice'
 
+import Info from '../components/userinfo/info'
+import UserRate from '../components/userinfo/userrate'
+import UserArticle from '../components/userinfo/userarticle'
+import UserComment from '../components/userinfo/usercomment'
+import UserWrong from '../components/userinfo/userwrong'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -114,6 +120,32 @@ const routes = [
   {
     path: '/practice',
     component: Practice
+  },
+  {
+    path: '/info',
+    component: Info,
+    children: [
+      {
+        path: '',
+        component: UserRate
+      },
+      {
+        path: 'userrate',
+        component: UserRate
+      },
+      {
+        path: 'userarticle',
+        component: UserArticle
+      },
+      {
+        path: 'usercomment',
+        component: UserComment
+      },
+      {
+        path: 'userwrong',
+        component: UserWrong
+      }
+    ]
   }
 ]
 
