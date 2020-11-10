@@ -85,6 +85,8 @@ export default {
           // 把用户填写的登录信息发给服务器
           this.axios.post('/api/user/login', user).then(body => {
             // 服务器检测用户提交的用户名和密码, 如果检测成功, 则服务器返回密码的md5值, 否则服务器回送一个空值
+            // 事实证明这样做存在一个很大的问题：把密码的MD5值作为包粗壮乃客户端证明用户已登录的凭证式不靠谱的, 当客户端和服务端通信时, 
+            // 如果服务端需要客户端提供自己的身份, 则这个MD5值无法验证用户身份, 因为不同的用户很可能用相同的密码
             const token = body.data
             if (token === '') {
               alert('token from server is:' + token)

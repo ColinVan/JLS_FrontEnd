@@ -10,12 +10,12 @@ module.exports = {
 
     },
     devServer: {
-        host: '192.168.1.103',
+        host: 'localhost',
         port: 8081,
-        https: true,
+        // https: true,
         proxy: {
             '/api': {
-                target: "http://192.168.1.103:8080",
+                target: "http://localhost:8080",
                 ws: true,
                 changeOrigin: true,
                 pathRewrite: {

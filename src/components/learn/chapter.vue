@@ -2,7 +2,7 @@
   <div>
     <!--页首的图片,这里的style用的是v-bind绑定比较复杂.-->
     <div
-      v-bind:style="{backgroundImage:'url(' + content.chapterimg + ')',
+      v-bind:style="{backgroundImage:'url(' + content.chapterImg + ')',
        backgroundSize:'cover',
        backgroundPosition:'center',
        backgroundRepeat:'repeat',
@@ -15,10 +15,10 @@
     <!--图片上的两行小字-->
     <div style="text-align:center;position: relative;width: 100%;height:350px;z-index: 2;">
       <p style="color: aliceblue;font-size: 40px;position: relative;margin: auto;padding-top: 100px;letter-spacing: 5px">
-        {{content.chaptername}}
+        {{content.chapterName}}
       </p>
       <p style="color: aliceblue;font-size: 12px;letter-spacing: 2px">
-        {{content.chapterreadnum}} View in {{content.chaptertype}}
+        {{content.chapterReadNum}} View in {{content.chaptertype}}
       </p>
     </div>
 
@@ -27,7 +27,7 @@
       <mavon-editor
         style="z-index: 2"
         class="md"
-        :value="content.chaptercontent"
+        :value="content.chapterContent"
         :subfield="prop.subfield"
         :defaultOpen="prop.defaultOpen"
         :toolbarsFlag="prop.toolbarsFlag"
@@ -56,19 +56,20 @@ export default {
   activated () {
     // for example: now this.$route.path is: /learn/chapter/6
     const url = '/api/chapter/' + this.$route.path.substring(this.$route.path.lastIndexOf('/') + 1, this.$route.path.length)
-    alert('url in chapter is: ' + url) // /api/chapter/6
+    // alert('url in chapter is: ' + url) // /api/chapter/6
     this.axios.get(url).then(body => {
       this.content = body.data
 
-      this.axios.get('/api/user/progress/query', {
-        params: {
-          token: this.$store.getters.getToken,
-          chapterid: this.content.chapterid
-        }
-      }).then(body => {
-        console.log(body.data)
-        this.isLearn = body.data
-      })
+      if (this.$store.getters.getToken) {
+        this.axios.post('/api/user/progress/query', {
+            token: this.$store.getters.getToken,
+            chapterId: this.content.chapterId
+        }).then(body => {
+          console.log(body.data)
+          this.isLearn = body.data
+        })
+      }
+
     })
   },
   methods: {
@@ -76,7 +77,7 @@ export default {
     hasLearn () {
       this.axios.post('/api/user/progress/add', {
         token: this.$store.getters.getToken,
-        chapterid: this.content.chapterid
+        chapterId: this.content.chapterId
       }).then(body => { this.isLearn = true })
     }
   },
@@ -107,12 +108,6 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
 
   }
-
-  /*.tree {
-    background: #fbfbfb;
-    width: 250px;
-  }*/
-
   .hasLearnDiv {
     text-align: center;
     margin-top: 20px;
