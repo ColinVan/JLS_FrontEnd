@@ -29,8 +29,8 @@ export default new Vuex.Store({
       return state.token
     },
     isLogin (state) {
-      console.log('isLogin  token=' + state.token)
-      return !(state.token == null || state.token === 'null')
+      console.log('isLogin?  token=' + state.token)
+      return !(state.token == null || state.token === 'null' || state.token === '')
     }
   }
 })

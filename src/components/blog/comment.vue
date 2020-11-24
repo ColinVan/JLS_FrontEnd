@@ -2,10 +2,10 @@
   <div class="comment-card">
     <div style="margin: 10px 10px">
       <p style="color:grey;text-align:left">
-       {{comment.commentdate.substring(0,10)}} {{author.nickname}}：
+       {{comment.commentDate.substring(0,10)}} {{author}}：
       </p>
       <p style="color:black;font-size:18px;">
-        {{comment.commentcontent}}
+        {{comment.commentContent}}
       </p>
     </div>
   </div>
@@ -22,7 +22,7 @@ export default {
   },
 
   mounted () {
-    this.axios.get('/api/user/byId/' + this.comment.commentauthorid).then(body => {
+    this.axios.post('/api/user/searchUserNickName', {userId: this.comment.commentAuthorId}).then(body => {
       this.author = body.data
     })
   },

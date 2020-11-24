@@ -67,13 +67,18 @@ export default {
   },
   methods: {
     submit () {
-      this.axios.post('/api/article/add', {
-        title: this.title,
-        introduction: this.introduction,
-        content: this.content,
-        type: this.type,
-        token: this.$store.getters.getToken
-      }).then(body => {
+      alert(JSON.parse(this.$store.getters.getToken).token)
+      this.axios.post('/api/addarticle', {
+          title: this.title,
+          introduction: this.introduction,
+          content: this.content,
+          type: this.type
+        }, {
+          headers: {
+            'Authorization': JSON.parse(this.$store.getters.getToken).token
+          }
+        }
+      ).then(body => {
         alert('发布成功!')
         // 刷新当前文档
         location.reload()

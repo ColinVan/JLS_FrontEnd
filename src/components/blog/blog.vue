@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted () {
-    this.axios.get('/api/article/list').then(body => { this.articles = body.data; this.changeCurrentArticle() })
+    this.axios.get('/api/articleList').then(body => { this.articles = body.data; this.changeCurrentArticle() })
   },
 
   methods: {

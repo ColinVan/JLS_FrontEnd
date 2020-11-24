@@ -6,7 +6,7 @@
       <!--letter-spacing设置字母间距属性-->
     </div>
     <hr>
-    <h1 font-size="96px">{{article.articletitle}}</h1>
+    <h1 font-size="96px">{{article.articleTitle}}</h1>
     <!--帖子的主要部分,包括正文和下方评论-->
     <el-row :gutter="10">
       <el-col :xs="24" :sm="18" :md="18">
@@ -14,7 +14,7 @@
           <mavon-editor
             style="z-index: 2"
             class="md"
-            :value="article.articlecontent"
+            :value="article.articleContent"
             :subfield="prop.subfield"
             :defaultOpen="prop.defaultOpen"
             :toolbarsFlag="prop.toolbarsFlag"
@@ -61,10 +61,10 @@
           <div width="50%" height="100px">
             <img src="../../assets/dalao.jpg">
           </div>
-          <p>  博主:{{user.nickname}}</p>
-          <p>  发表时间:{{article.articledate.substring(0,10)}}</p>
-          <p>  阅读量:{{article.articlereadnum}}</p>
-          <p>  评论量:{{article.articlecommentnum}}</p>
+          <p>  博主:{{user}}</p>
+          <p>  发表时间:{{article.articleDate.substring(0,10)}}</p>
+          <p>  阅读量:{{article.articleReadNum}}</p>
+          <p>  评论量:{{article.articleCommentNum}}</p>
         </div>
         <hr>
       </el-col>
@@ -95,17 +95,16 @@ export default {
     // 先得到article对象
     this.axios.get(url).then(body => {
       this.article = body.data
-      const urlUser = '/api/user/byId/' + this.article.articleauthor
-      const urlComment = '/api/comment/list/sort/' + this.article.articleid
+      const urlUser = '/api/user/byId/' + this.article.articleAuthor
       // 再得到作者相关信息
-      this.axios.get(urlUser).then(body => {
+      this.axios.post('/api/user/searchUserNickName', {userId: this.article.articleAuthor}).then(body => {
         this.user = body.data
-        if (this.article.articletype === '分享') {
+        if (this.article.articleType === '分享') {
           this.color = '#409EFF'
         }
       })
       // 与请求作者相关信息的同时 请求评论相关信息
-      this.axios.get(urlComment).then(body => {
+      this.axios.post('/api/comment/list/sort', {articleId: this.article.articleId}).then(body => {
         this.comments = body.data
       })
     })
@@ -115,7 +114,7 @@ export default {
       if (this.input !== '') {
         this.axios.post('/api/comment/add', {
           content: this.input,
-          articleid: this.article.articleid,
+          articleid: this.article.articleId,
           token: this.$store.getters.getToken
         }).then(body => { location.reload() })
         alert('评论成功!')

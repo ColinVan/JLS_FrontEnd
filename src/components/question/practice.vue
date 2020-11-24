@@ -6,7 +6,6 @@
 
     <!--子组件practiceCard用于显示设置题目数量和难度的-->
     <practiceCard v-bind:questions="questions"></practiceCard>
-    <practiceNote v-bind:testnote="testnote"></practiceNote>
 
     <!--visible:是否显示 Dialog-->
     <!--close-on-click-modal:是否可以通过点击modal关闭Dialog;close-on-press-escape:是否可以通过按下ESC关闭Dialog-->
@@ -51,7 +50,6 @@
 <script>
 
 import practiceCard from './practice_card'
-import practiceNote from './practice_note'
 
 export default {
   name: 'practice',
@@ -68,7 +66,7 @@ export default {
 
     }
   },
-  components: { practiceCard, practiceNote },
+  components: { practiceCard },
 
   activated () {
     if (!this.questions.length) {
@@ -88,14 +86,11 @@ export default {
     exam: function () {
       this.showPicture = false
       this.dialogFormVisible = false
-      this.axios.get('/api/question/list/sort', {
-        params: {
-          type: this.type,
-          star: this.star
-        }
+      this.axios.post('/api/question/list/sort', {
+        type: this.type,
+        star: this.star
       }).then(body => {
         this.questions = body.data
-        this.testnote = 'caonima'
       })
     }
   }
